@@ -15,11 +15,11 @@ LEFT_PIN = 2
 RIGHT_PIN = 3
 LED_PIN = 17
 
-WPM = 20.0
+WPM = 15.0
 DIT_LENGTH = WPM / 200.0
 DAH_LENGTH = DIT_LENGTH * 3.0
 
-SAMPLE_RATE = 44100 
+SAMPLE_RATE = 22500 
 BITS = 16 
 
 CHARS = {
@@ -177,7 +177,9 @@ class Keyer():
             self.dequeue()
 
 def start_audio():
-    pygame.mixer.init(frequency=SAMPLE_RATE, size=-BITS, channels=2)
+    pygame.mixer.pre_init(frequency=SAMPLE_RATE, size=-BITS, channels=2, buffer=64)
+    pygame.mixer.init()
+    pygame.init()
 
 def quit():
     pygame.mixer.quit()
